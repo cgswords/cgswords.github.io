@@ -4,6 +4,8 @@ title:  Substrings in Scheme
 tags:   snippet code
 ---
 
+I wrote this today.
+
 {% highlight scheme %}
 (define substring?
   (lambda (pat str)
@@ -18,3 +20,5 @@ tags:   snippet code
           [else (sublist-check pat (cdr ls) pat-length (sub1 ls-length))]))
     (sublist-check pat ls (length pat) (length ls))))
 {% endhighlight %}
+
+Here it is for the next poor soul.

@@ -1,7 +1,7 @@
-title: RedCup
-description: "Redcup: An awesome Theme for Jekyll"
+title: cgswords
+description: "A web blog for Cameron Swords"
 
-url: http://nadjetey.github.io/redcup/
+url: http://cgswords.github.io/
 port: 3000
 highlighter: pygments
 
@@ -11,6 +11,6 @@ markdown: redcarpet
 google_analytics: #
 
 owner:
-  name: Nii Adjetey Sowah
-  disqus_shortname: nadjetey
-  twitter: _nadjetey
+  name: Cameron Swords
+  disqus_shortname: 
+  twitter: CameronSwords

@@ -45,22 +45,24 @@ app tag is pushed on. At the end of all of this, the string is split into
 tokens based on its application and argument delimiters, but still shaped
 incorrectly (and backwards).
 
-    (define app-splitter
-      (lambda (ls stack1 stack2)
-        (cond
-          [(null? ls) (cons stack1 stack2)]
-          [(eq? (car ls) '+) 
-            (app-splitter (cdr ls) (cons '+ stack1) stack2)]
-          [(eq? (car ls) '0) 
-            (app-splitter (cdr ls) (cons 0 stack1)  stack2)]
-          [(eq? (car ls) '$) 
-            (app-splitter (cdr ls) (cons '$ stack1) stack2)]
-          [(eq? (car ls) '%) 
-            (app-splitter (cdr ls) '() (cons stack1 stack2))]
-          [(and (eq? (car ls) '@) (null? stack1))
-           (app-splitter (cdr ls) '() (cons 'app stack2))]
-          [(eq? (car ls) '@)
-           (app-splitter (cdr ls) '() (cons 'app (cons stack1 stack2)))])))
+{% highlight scheme %}
+(define app-splitter
+  (lambda (ls stack1 stack2)
+    (cond
+      [(null? ls) (cons stack1 stack2)]
+      [(eq? (car ls) '+) 
+        (app-splitter (cdr ls) (cons '+ stack1) stack2)]
+      [(eq? (car ls) '0) 
+        (app-splitter (cdr ls) (cons 0 stack1)  stack2)]
+      [(eq? (car ls) '$) 
+        (app-splitter (cdr ls) (cons '$ stack1) stack2)]
+      [(eq? (car ls) '%) 
+        (app-splitter (cdr ls) '() (cons stack1 stack2))]
+      [(and (eq? (car ls) '@) (null? stack1))
+       (app-splitter (cdr ls) '() (cons 'app stack2))]
+      [(eq? (car ls) '@)
+       (app-splitter (cdr ls) '() (cons 'app (cons stack1 stack2)))])))
+{% endhighlight %}
 
 This moves us to app-builder, which takes this reversed list and adds proper
 nesting by using its own stack as follows: it 'pops' something off the original
@@ -71,15 +73,17 @@ previous two elements off of stack C and pushes the whole
 another application tag). This repeats until stack B is empty, at which point
 (if the input was correct), stack C contains the properly-shaped result.
 
-    (define app-builder
-      (lambda (ls stack)
-        (cond
-          [(null? ls) stack]
-          [(eq? (car ls) 'app)
-            (app-builder
-              (cdr ls)
-              `((app ,(car stack) ,(cadr stack)) . ,(cddr stack)))]
-          [else (app-builder (cdr ls) (cons (car ls) stack))])))
+{% highlight scheme %}
+(define app-builder
+  (lambda (ls stack)
+    (cond
+      [(null? ls) stack]
+      [(eq? (car ls) 'app)
+        (app-builder
+          (cdr ls)
+          `((app ,(car stack) ,(cadr stack)) . ,(cddr stack)))]
+      [else (app-builder (cdr ls) (cons (car ls) stack))])))
+{% endhighlight %}
 
 This completes the parsing, handing out the result. I thought this approach was
 neat (though possibly a little expensive); it requries two passes over the code

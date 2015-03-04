@@ -2,10 +2,11 @@
 layout: post
 title:  SeaTac
 tags:   pictures 
-photo_url:  seattle-airport.jpg
+image:
+  feature:  seattle-airport.jpg
+  credit: Cameron Swords
+  creditlink: #
 ---
-
-![Seattle Airport]({{ site.url }}/assets/images/seattle-airport.jpg)
 
 What an amazing aiport.
 

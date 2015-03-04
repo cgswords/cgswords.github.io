@@ -2,8 +2,8 @@ title: cgswords
 description: "A web blog for Cameron Swords"
 
 url: http://cgswords.github.io/
-port: 3000
-highlighter: redcarpet2
+port: 80
+highlighter: pygments
 
 permalink: /:year/:month/:day/:title.html
 markdown: redcarpet

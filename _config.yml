@@ -1,6 +1,6 @@
-title:            Site Title
-description:      Describe your website here.
-disqus_shortname: hpstrtheme
+title:            Bit Hacker
+description:      Cameron Swords on the long road to the Ph.D.
+disqus_shortname: cswords   
 reading_time:     true
 words_per_minute: 200
 # Your site's domain goes here (eg: //mmistakes.github.io, http://mademistakes.com, etc)
@@ -9,14 +9,14 @@ url:
 
 # Owner/author information
 owner:
-  name:           Your Name
+  name:           Cameron Swords
   avatar:         avatar.jpg
-  bio:            "Your bio goes here. It shouldn't be super long but a good two sentences or two should suffice."
-  email:          you@email.com
+  bio:            "Just a hacker, a misplaced Texan, a PL researcher, and a media addict."
+  email:          cswords@indiana.edu
   # Social networking links used in footer. Update and remove as you like.
-  twitter:        
+  twitter:       @CameronSwords 
   facebook:       
-  github:         
+  github:         cgswords
   stackexchange:  
   linkedin:       
   instagram:      
@@ -49,7 +49,7 @@ sass:
 permalink:   /:categories/:title/
 
 # Amount of post to show on home page
-paginate: 5
+paginate: 8
 
 kramdown:
   auto_ids: true

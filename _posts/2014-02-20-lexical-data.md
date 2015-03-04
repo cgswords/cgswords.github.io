@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Lexical Data: Lexical Scoping is a Right, Not a Privilege
+title: Lexical Data - Lexical Scoping is a Right, Not a Privilege
 tags: blog languages scope
 ---
 I had an interesting conversation with 

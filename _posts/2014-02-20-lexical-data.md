@@ -24,7 +24,7 @@ namespace-global way:
      
       interp : Exp -> Env Val -> Val
       interp = ...
-{% highlight haskell %}
+{% endhighlight %}
 
 It's interesting, though. If I would like to define an interpreter of type
 `Exp -> Val` which implicitly uses some environment to find the result
@@ -37,14 +37,14 @@ version inside in even Haskell:
       where
         interpH :: Exp -> Env Val -> Val
         interpH = ...
-{% highlight haskell %}
+{% endhighlight %}
 
 And yet, the environment here must still be exposed in the global namespace
 of the local module:
 
 {% highlight haskell %}
     data Env a = Empty | Ext a Env
-{% highlight haskell %}
+{% endhighlight %}
 
 This is *globally* exposed: not only does `interpH` use it, but any other piece
 of code is free to use this environment definition anywhere in the module.
@@ -63,7 +63,7 @@ write this code:
         data Env = Empty | Ext a Env
         interpH :: Exp -> Env Val -> Val
         interpH = ...
-{% highlight haskell %}
+{% endhighlight %}
 
 I want the entire type of `Env` *lexically enclosed*, just like helper
 functions are. And further, I'd like for *every definition* to get such
@@ -79,7 +79,7 @@ be able to write this code:
           ...
         interpH :: Exp -> Env Val -> Val
         interpH = ...
-{% highlight haskell %}
+{% endhighlight %}
 
 It's the case that `Idris` *does* support this, quite nicely. (David
 Christiansen has provided this code.)
@@ -101,7 +101,7 @@ Christiansen has provided this code.)
     *Teeest> Bar
     (input):1:1:No such variable Bar
     *Teeest> 
-{% highlight haskell %}
+{% endhighlight %}
 
 It's likely this works in `Agda`, too. And this is *important*; data
 definitions should be subject lexical scoping. Why should functions get

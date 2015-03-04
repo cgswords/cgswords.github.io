@@ -2,7 +2,7 @@
 layout: post
 title:  Are you free?
 tags:   pictures 
-photo_url:  btown-graffiti.gif
+photo_url:  btown-graffiti.jpg
 ---
 
 ![Are you free?]({{ site.url }}/assets/images/btown-graffiti.jpg)

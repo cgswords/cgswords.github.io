@@ -1,8 +1,9 @@
-(title . (Lexical Data: Lexical Scoping is a Right, Not a Privilege))
-(type . text)
-(tags .  (blog languages scope))
-(date .  (0 55 45 13 20 2 2014 0))
-(text . (I had an interesting conversation with 
+---
+layout: post
+title: Lexical Data: Lexical Scoping is a Right, Not a Privilege
+tags: blog languages scope
+---
+I had an interesting conversation with 
 [Edward Amsden](http://www.edwardamsden.com/) yesterday. 
 The crux of it was his claim that modern functional languages do an
 *incredibly poor* job of scoping data definitions. By comparison, languages
@@ -15,35 +16,29 @@ The language `Idris` introduces name spaces, which help ease the problem,
 but they still require programmers to define data types in a
 namespace-global way:
 
-<pre>
-namespace Foo
-  data Env a where
-    Empty : Env a
-    Ext : a -> Env a -> Env a
- 
-  interp : Exp -> Env Val -> Val
-  interp = ...
-</pre>
+    namespace Foo
+      data Env a where
+        Empty : Env a
+        Ext : a -> Env a -> Env a
+     
+      interp : Exp -> Env Val -> Val
+      interp = ...
 
 It's interesting, though. If I would like to define an interpreter of type
 `Exp -> Val` which implicitly uses some environment to find the result
 without wishing to expose it to the user, I can easily write the full
 version inside in even Haskell:  
 
-<pre>
-interp :: Exp -> Val
-interp e = interpH e []
-  where
-    interpH :: Exp -> Env Val -> Val
-    interpH = ...
-</pre>
+    interp :: Exp -> Val
+    interp e = interpH e []
+      where
+        interpH :: Exp -> Env Val -> Val
+        interpH = ...
 
 And yet, the environment here must still be exposed in the global namespace
 of the local module:
 
-<pre>
-data Env a = Empty | Ext a Env
-</pre>
+    data Env a = Empty | Ext a Env
 
 This is *globally* exposed: not only does `interpH` use it, but any other piece
 of code is free to use this environment definition anywhere in the module.
@@ -55,56 +50,47 @@ That's the crux: why can't I also define lexically-scoped data, close to the
 way I can define lexically-scoped helper functions? Ideally, I'd like to
 write this code:
 
-<pre>
-interp :: Exp -> Val
-interp e = interpH e []
-  where
-    data Env = Empty | Ext a Env
-    interpH :: Exp -> Env Val -> Val
-    interpH = ...
-
-</pre>
+    interp :: Exp -> Val
+    interp e = interpH e []
+      where
+        data Env = Empty | Ext a Env
+        interpH :: Exp -> Env Val -> Val
+        interpH = ...
 
 I want the entire type of `Env` *lexically enclosed*, just like helper
 functions are. And further, I'd like for *every definition* to get such
 treatment. Even type-class instances should get this! If it'd like, I should
 be able to write this code:
 
-<pre>
-interp :: Exp -> Val
-interp e = interpH e []
-  where
-    data Env = Empty | Ext a Env
-    instance (Show Env) where
-      ...
-    interpH :: Exp -> Env Val -> Val
-    interpH = ...
-</pre>
+    interp :: Exp -> Val
+    interp e = interpH e []
+      where
+        data Env = Empty | Ext a Env
+        instance (Show Env) where
+          ...
+        interpH :: Exp -> Env Val -> Val
+        interpH = ...
 
 It's the case that `Idris` *does* support this, quite nicely. (David
 Christiansen has provided this code.)
 
-<pre>
-module Teeeest
+    module Teeeest
 
-fnord : Nat -> Nat
-fnord z = case Bar of
-            Bar => S z
-            Something => z
-  where data Foo = Bar | Something
+    fnord : Nat -> Nat
+    fnord z = case Bar of
+                Bar => S z
+                Something => z
+      where data Foo = Bar | Something
 
---- REPL
-*Teeest> fnord 5
-6 : Nat
-*Teeest> Foo
-(input):1:1:No such variable Foo
-*Teeest> Bar
-(input):1:1:No such variable Bar
-*Teeest> 
-</pre> 
+    --- REPL
+    *Teeest> fnord 5
+    6 : Nat
+    *Teeest> Foo
+    (input):1:1:No such variable Foo
+    *Teeest> Bar
+    (input):1:1:No such variable Bar
+    *Teeest> 
 
 It's likely this works in `Agda`, too. And this is *important*; data
 definitions should be subject lexical scoping. Why should functions get
-preferential treatment?))
-
-
+preferential treatment?

@@ -1,8 +1,9 @@
-(title . (I Wrote a Grant))
-(type . text)
-(tags .  (blog research))
-(date .  (0 40 19 19 17 1 2014 0))
-(text . (So I wrote a grant. It wasn't particularly good, and it isn't
+---
+layout: post
+title: I Wrote a Grant
+tags: blog research
+---
+So I wrote a grant. It wasn't particularly good, and it isn't
 likely to get funded, and it got finished in *far too little time* to be
 shiny, but it got written. Some day's that's all we can ask for. The
 experience was intense, and amazing, and it yielded some interesting
@@ -35,5 +36,5 @@ that can be used to prove language properties, or to perform aggressive,
 type-guided optimizations including novel non-standard analyses and
 transformations related to information-flow and energy consumption.
 
-*Wish me luck!*))
+*Wish me luck!*
 

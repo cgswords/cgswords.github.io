@@ -8,7 +8,7 @@ layout: default
       <div class="padded-content">
         <div class="title">{{ post.title }}</div>
       {% if post.photo_url %}
-        <div class="image" style="background-image:url('{{ post.photo_url }}')"></div>
+        <div class="image" style="background-image:url('{{site.url}}/assets/image/{{ post.photo_url }}')"></div>
       {% else %}
         <!-- <div class="title">{{ post.title }}</div> -->
         <info datetime="{{ page.date | date: "%Y-%m-%d" }}">

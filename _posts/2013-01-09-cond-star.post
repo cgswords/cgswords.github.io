@@ -1,0 +1,96 @@
+(title . (Adding A* Search to miniKanren))
+(type . text)
+(tags .  (blog code languages))
+(date .  (0 29 46 1 9 1 2013 0))
+(text . (The biggest problem I see right now with miniKanren is that its search
+is so hopelessly unguided. MiniKanren's `conde` form uses what might be 
+described as "breadth-first"**[1]** search (as opposed to Prolog's depth-first
+approach). This works fine when you're looking for shallow results, and it
+even provides a fairly resilient system: because we find shallow answers first,
+if shallow solutions exist we will find them *quickly*. 
+
+### Motivation ###
+
+Anyone with a few weeks' education in AI can tell you that breadth-first search
+is almost *always* preferable to depth-first search; it's a more general hammer,
+and far better as a tool in the *general case*. But it does break down, and it
+does so quite often. This is often discussed early on in introductory AI classes, and is soon discarded in favor of **A-star search**.
+
+### Soltuion ###
+
+The problem with A-star search is that it requires a heuristic, and `conde` doesn't lend itself well to this form. So I am writing this article to describe a new form, `cond*`, which does. The syntax is as follows:
+
+    (cond*
+      (heuristic goal*)
+      ...)
+
+Here, `heuristic` is a vanilla Scheme (or Clojure) lambda that takes some number
+of arguments (my thoughts might be a copy of the current substitution, the 
+current search depth (by counting the number of bounces on the trampoline), and 
+the number of ungrounded logic variables currently in existence). This heuristic
+will return a natural number, and these will be used to order the expansion of 
+clauses. 
+
+### Examples ###
+
+To demonstrate, here are some examples:
+
+    > (run 1 (q)
+        (cond*
+          ((lambda (s r f) 1) (== q #t))
+          ((lambda (s r f) 2) (== q #f))))
+
+    (#t)
+
+In this example, the first clause has a lower number than the second, so it is run first.
+
+    > (run 1 (q)
+        (cond*
+          ((lambda (s r f) 2) (== q #t))
+          ((lambda (s r f) 1) (== q #f))))
+
+    (#f)
+
+In this example, the second clause has a lower number than the second, so it is run first.
+
+Already, this has some nice implications for determining how clauses run (instead of manually reordering the lines themselves). But these priorities are not contained within a single cond*---they should span across every "thread" in the system. Here is another snippet:
+
+    > (define demo
+        (lambda (x)
+          (cond*
+            ((lambda (s r f) (add1 r)) (demo x))
+            ((lambda (s r f) 2) (== x #f))
+            ((lambda (s r f) 1) (== x #t)))))
+
+    > (run 1 (q) (demo q))
+    (#t)
+
+    > (run 4 (q) (demo q))
+    (#t #t #f #f)
+
+Here, the function uses its recursive depth as the priority value in its heuristic for two goals: the recursive call and the the (== x #f) goal. So the priorities of the goal clauses are as follows:
+
+    2 -> (demo x)
+    2 -> (== x #f)
+    1 -> (== x #t)
+
+    3 -> (demo x)
+    2 -> (== x #f)
+    1 -> (== x #t)
+
+We can see that the priorities may be sorted, yielding the answer we got previously. This means that between calls, we can order our search. So if a branch finds a 'more promising' goal to try before a shallower branch, it will try the more promising one first!
+
+With well-designed heuristics, we can get incredible control over how miniKanren explores its search space, ultimately yielding more interesting results when asking for only a few answers in a giant search space.
+
+### Applications ###
+
+This idea was originally born when discussing using a miniKanren implementation of a type inferencer. By running a type inferencer backwards, you can get well-typed programs, but simple programs are found first---and there are a *lot* of simple programs. Using this model, you could, for example, rank answers of significant recursion depth as more promising than shallower answers, meaning that complex programs will be produces long before the shallow, "silly" programs.
+
+### Conclusion ###
+
+I hope this gets added to miniKanren (and core.logic) one day. I've fiddled with the implementation before in hopes of adding it, but adding the inter-level recursion requires changing how the `bind` interacts with `mplus`, allowing `bind` to control the order in which `mplus*` advances goals. Maybe one day...
+
+### Footnotes ###
+
+**[1]** *It has also been said that miniKanren is closest to iterative deepening; I'm not certain, but my work with it seems to indicate that reasoning about `conde` as breadth-first search works just fine.*))
+

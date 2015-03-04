@@ -17,13 +17,13 @@ but they still require programmers to define data types in a
 namespace-global way:
 
 {% highlight haskell %}
-    namespace Foo
-      data Env a where
-        Empty : Env a
-        Ext : a -> Env a -> Env a
-     
-      interp : Exp -> Env Val -> Val
-      interp = ...
+namespace Foo
+  data Env a where
+    Empty : Env a
+    Ext : a -> Env a -> Env a
+ 
+  interp : Exp -> Env Val -> Val
+  interp = ...
 {% endhighlight %}
 
 It's interesting, though. If I would like to define an interpreter of type
@@ -32,11 +32,11 @@ without wishing to expose it to the user, I can easily write the full
 version inside in even Haskell:  
 
 {% highlight haskell %}
-    interp :: Exp -> Val
-    interp e = interpH e []
-      where
-        interpH :: Exp -> Env Val -> Val
-        interpH = ...
+interp :: Exp -> Val
+interp e = interpH e []
+  where
+    interpH :: Exp -> Env Val -> Val
+    interpH = ...
 {% endhighlight %}
 
 And yet, the environment here must still be exposed in the global namespace
@@ -57,12 +57,12 @@ way I can define lexically-scoped helper functions? Ideally, I'd like to
 write this code:
 
 {% highlight haskell %}
-    interp :: Exp -> Val
-    interp e = interpH e []
-      where
-        data Env = Empty | Ext a Env
-        interpH :: Exp -> Env Val -> Val
-        interpH = ...
+interp :: Exp -> Val
+interp e = interpH e []
+  where
+    data Env = Empty | Ext a Env
+    interpH :: Exp -> Env Val -> Val
+    interpH = ...
 {% endhighlight %}
 
 I want the entire type of `Env` *lexically enclosed*, just like helper
@@ -71,36 +71,36 @@ treatment. Even type-class instances should get this! If it'd like, I should
 be able to write this code:
 
 {% highlight haskell %}
-    interp :: Exp -> Val
-    interp e = interpH e []
-      where
-        data Env = Empty | Ext a Env
-        instance (Show Env) where
-          ...
-        interpH :: Exp -> Env Val -> Val
-        interpH = ...
+interp :: Exp -> Val
+interp e = interpH e []
+  where
+    data Env = Empty | Ext a Env
+    instance (Show Env) where
+      ...
+    interpH :: Exp -> Env Val -> Val
+    interpH = ...
 {% endhighlight %}
 
 It's the case that `Idris` *does* support this, quite nicely. (David
 Christiansen has provided this code.)
 
 {% highlight haskell %}
-    module Teeeest
+module Teeeest
 
-    fnord : Nat -> Nat
-    fnord z = case Bar of
-                Bar => S z
-                Something => z
-      where data Foo = Bar | Something
+fnord : Nat -> Nat
+fnord z = case Bar of
+            Bar => S z
+            Something => z
+  where data Foo = Bar | Something
 
-    --- REPL
-    *Teeest> fnord 5
-    6 : Nat
-    *Teeest> Foo
-    (input):1:1:No such variable Foo
-    *Teeest> Bar
-    (input):1:1:No such variable Bar
-    *Teeest> 
+--- REPL
+*Teeest> fnord 5
+6 : Nat
+*Teeest> Foo
+(input):1:1:No such variable Foo
+*Teeest> Bar
+(input):1:1:No such variable Bar
+*Teeest> 
 {% endhighlight %}
 
 It's likely this works in `Agda`, too. And this is *important*; data

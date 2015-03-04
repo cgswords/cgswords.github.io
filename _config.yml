@@ -3,7 +3,7 @@ description: "A web blog for Cameron Swords"
 
 url: http://cgswords.github.io/
 port: 3000
-highlighter: pygments
+highlighter: redcarpet2
 
 permalink: /:year/:month/:day/:title.html
 markdown: redcarpet

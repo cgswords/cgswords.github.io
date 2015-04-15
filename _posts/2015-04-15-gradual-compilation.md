@@ -17,9 +17,21 @@ This criteria is ultimately rephrased as a new theorem-shape, called the
 *gradual guarantee*, as follows:
 
 <div>
-Suppose $e \sqsubseteq e'$ and $\cdotp \vdash e : \tau$.
+Suppose $e \sqsubseteq e'$ and $\cdotp \vdash e : \tau$. Then:
+
+1. $\cdotp \vdash e' : \tau'$ and $\tau \sqsubseteq \tau'$
+2. If $e \Downarrow v$, the $e' \Downarrow v'$ and $v \sqsubseteq v'$, and
+   if $e \Uparrow$, then $e' \Uparrow$.
+3. If $e' \Downarrow v'$, then $e \Downarrow v$ where $v \sqsubseteq v'$ or 
+   $e \Downarrow \mathsf{blame}_\tau l$, and
+   if $e' \Uparrow$, then $e \Uparrow$ or $e \Downarrow \mathsf{blame}_\tau l$.
 </div>
 
-While interesting in its own right, ...
+While interesting in its own right, I think that this guarantee can be extended
+in an interesting and insightful way: instead of using this as a criteria for
+describing the interactions between the typed and untyped portions of a
+gradually-typed language, we might refocus this to help encode the process of
+compiling from typed to untyped languages.
+
 
 

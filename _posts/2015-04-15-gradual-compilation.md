@@ -88,5 +88,5 @@ gradually-typed languages. And this yields a further set of questions:
 2. Can we reformulate these properties to work over gradually-typed terms? 
 3. Which of these additional properties are meaningful and worthwhile?
 
-I'm not currently certain of the answers, but I certainly think that this
-warrants further exploration.
+I don't have those answers right now, but I certainly think that this warrants
+further exploration.

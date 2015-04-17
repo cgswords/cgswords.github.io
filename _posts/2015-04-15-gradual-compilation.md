@@ -53,23 +53,60 @@ less precise, than the original type.
 The second criterion suggests that if, under our operation semantics, the
 original expression yields some value $v$, then after compilation our result
 should yield some value $v'$ that is less precise, but otherwise equivalent,
-to the original expression.
+to the original expression. This criterion states, in effect, that our
+compiler behaves correctly.
 
 The third criterion provides a more interesting insight: it constrains what
-a compiler may produce. We take this third standard to suggest that if
-the result of a compiler (pass) terminates in a value, this result is
-only reasonable if there is some input expression that is more precise.
-Moreover, this input expression may produce errors where the output
-does not, but is otherwise behaviorally identical.
+the target language may do while maintaining a ling to a the source language.
+We take this third standard to suggest that if the result of a compiler (pass)
+terminates in a value, this result is only reasonable if there is some input
+expression that is more precise. Moreover, this input expression may produce
+errors where the output does not, but is otherwise behaviorally identical.
 
-This last criterion is, in some sense, the crux of the "risk of" compilation:
-our compiler may transform code with errors into code that does not produce
-these errors by removing critical information during the compilation process.
-This is the difference, in C, between producing a type error and accidentally
-jumping into and executing an integer-as-pointer. 
+The original intent of the third criterion is to facilitate moving from untyped
+to typed programs: to take programs that don't have types and add them,
+promising that the only change may be type errors. Unfortuately, compilation
+is more typically one-way. In the context of compilation, this suggests that
+the result of the compiled program will behave as the input program, modulo
+some errors that the program may be detectable before compilation. 
 
-While potentially problematic in terms of program meaning, this is a necessary
-horror of compilation: a compiler may take a program that, under the original
-semantics, should produce an error, and (possibly incorrectly) conceal this
-error.
+Why is it important to note that a compiler might remove errors? What do we gain
+from this? I think, at the crux, this ultimately describes the lossy nature of
+compilation. Two or three or five source programs may yield the same final
+output after desugaring, optimizations, and compilation, and there are a dozen
+others that may contain potentially unsafe regions but otherwise run to
+completion.
 
+This raises a better question, however: does this criterion buy us anything
+in the realm of compilation? Let us reformulate the theorem, discarding the
+precision relation in favor of the compilation relation.
+
+Suppose $e' = [[e]]$ and $\cdotp \vdash e : \tau$. Then:
+
+1. First, $\cdotp \vdash e': \tau'$ and $\tau' = [[\tau]]$
+2. If $e \Downarrow v$, then $e' \Downarrow v'$ and $v' = [[v]]$, and
+   if $e \Uparrow$, then $e' \Uparrow$.
+3. If $e' \Downarrow v'$, then $e \Downarrow v$ where $v' = [[v]]$ or 
+   <span>$e \Downarrow \mathsf{blame}_\tau l$</span>, and
+   if $e' \Uparrow$, then $e \Uparrow$ or 
+   <span>$e \Downarrow \mathsf{blame}_\tau l$</span>.
+
+Is there ever a case, in our compilation process, where the second property
+will hold but the third will not? The original publication suggests that 
+property 3 is a direct corollary to property 2, and I am inclined to agree:
+any compiler that behaves correctly and precisely state that its output
+matches its input, modulo the opportunity for errors. This isn't, however, a
+surprising result: the first two parts of this theorem seem natural gaurantees
+for a compilation process. Indeed, one of the first proofs in Software
+Foundations regarding languages deals with the second criterion:
+
+{% highlight coq %}
+Theorem optimize_0plus_sound: forall a,
+  aeval (optimize_0plus a) = aeval a.
+{% endhighlight %}
+
+This naturally suggests (perhaps rightly so) that the relation between static
+and dynamic languages can be thought of as a sort of compilation process. 
+It also asks another question: what other properties about compilation do we
+usually want? Can we reformulate these properties to work over gradually-typed
+terms? Which of these additional properties are meaningful and worthwhile?

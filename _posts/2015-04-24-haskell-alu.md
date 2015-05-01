@@ -116,7 +116,7 @@ straight-forward. We will "cheat" here for simplicity, however.
 Constructing a full multiplexer from `and` and `or` requires a series
 of additional analog circuitry:
 
-![Analog Multiplexer]({ site.url }}/assets/images/multiplexer.gif)})
+![Analog Multiplexer]({{ site.url }}assets/images/multiplexer.gif)
 
 This construction is left as an exercise to the reader; instead,
 we will opt for the following digital multiplexer, and define

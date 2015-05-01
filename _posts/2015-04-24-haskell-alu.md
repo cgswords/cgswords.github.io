@@ -17,7 +17,7 @@ using Haskell's `&&` and `||` operators.
 {% highlight haskell %}
 halfBit :: Bool -> Bool -> Bool
 halfBit a b = (a && not b) || (b && not a)
-{% endhighlight %i}
+{% endhighlight %}
 
 Observe, however, that this adder is equivalent to using `xor`, so
 we can simply define it directly. We also include an infix version,

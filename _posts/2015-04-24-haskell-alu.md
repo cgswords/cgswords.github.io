@@ -86,3 +86,15 @@ bitsAdd (x:xs) (y:ys) cin =
 aluAdd :: [Bool] -> [Bool] -> [Bool]
 aluAdd a b = bitsAdd a b False
 {% endhighlight %}
+
+This ALU starts with an empty carry-in and iteratively performs `bac`
+over each pair of inpus, threading the new carry bit through to the
+next computation until we are at the end. Notice that we throw the
+final carry bit away; overflowing is just find on a processor.
+
+Even so, we have now constructed a 32-bit unsigned integer adder
+ALU from first principles: from `and` and `or`, or, perhaps
+more accurately, `and`, `or`, and `xor`. This ALU isn't particularly
+useful right now, but in the next installment we will add a multiplexer
+and additional ALU operations, then add register store and loads to
+support larger computations. 

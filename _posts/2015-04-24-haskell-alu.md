@@ -3,25 +3,32 @@ layout: post
 title: A Small ALU in Haskell, Part I
 tags: blog code haskell bits
 ---
-This post is going to be about sketching a small ALU implementation in Haskell.
-I originally wrote this code for a discussion section for a Discrete Math honors
-course, presented right after they learned Boolean algebra. I consider ALUs
-to be interesting because they are a direct application of Boolean algebra, and 
-it is easy to extend into something realistically resembling a computer (from the
-1980s).
+I consider ALUs to be interesting because they are a direct
+application of Boolean algebra, and it is easy to extend into
+something realistically resembling a computer (from the 1980s).
+This post is going to be about sketching a small ALU implementation in
+Haskell.  I originally wrote this code for a discussion section for a
+Discrete Math honors course, presented right after they learned
+Boolean algebra. 
 
 I have since cleaned the code up once or twice, and I decided it would
-be neat to present it here. We start simply: we define a half-bit adder
-using Haskell's `&&` and `||` operators.
+be neat to present it here. Due to its length, I am going to do it in a
+few parts: 
+1. We will construct a simple ALU Adder for 32-bit Boolean values 
+2. We will construct a larger ALU to support `and`, `or`, and `xor`
+   and then construct a multiplexer to give us the correct answer.
+   This installment will also feature the addition of registers with
+   `load` and `save` to feature more general computation.
+3. Finally, we will add program counter, branching and jumps to
+   construct something resembling a full computer.
 
-{% highlight haskell %}
-halfBit :: Bool -> Bool -> Bool
-halfBit a b = (a && not b) || (b && not a)
-{% endhighlight %}
-
-Observe, however, that this adder is equivalent to using `xor`, so
-we can simply define it directly. We also include an infix version,
-`*|`, for ease of use.
+In this first installment, we begin simply with the classical
+definition of `xor`, which will allow us to circumvent the classical
+construction of a 
+[half-bit adder](http://en.wikibooks.org/wiki/Digital_Circuits/Adders#Half_Adder),
+We also include an infix version, `*|`, for ease of use. This
+implementation should be straight-forward; we simply dispatch on the
+input and produce the appropriate truth value.
 
 {% highlight haskell %}
 xor :: Bool -> Bool -> Bool
@@ -34,8 +41,14 @@ xor True  True  = False
 a *| b = a `xor` b
 {% endhighlight %}
 
-Finally, we will construct a bit-adder with a carry-out from our
-half-bit adders (using `*\`):
+We are now ready to construct a whole-bit adder from two half-bit adders
+with a bit of "glue" to connect the three inputs with the two outputs.
+I would refer the interested reader to [this
+page](http://en.wikibooks.org/wiki/Digital_Circuits/Adders#Full_Adder)
+to see how this works with circuitry; the idea is that we add the
+three bits through two half-bit adders, and then do an appropriate
+amount of math to construct the carry-out bit (that is, the carry that
+results from the addition):
 
 {% highlight haskell %}
 bac :: Bool -> Bool -> Bool -> (Bool, Bool)
@@ -74,7 +87,9 @@ natToBin = padTo32 . natToBits
 Next, we construct our entire ALU in one "fell swoop", building a
 simple 
 [ripple-carry adder](http://en.wikipedia.org/wiki/Adder_%28electronics%29#Ripple-carry_adder),
-to sum two numbers:
+to sum two numbers. This implementation will take both inputs as lists
+of Boolean values and iterate over them, rippling the carry bit
+through to compute the binary addition in terms of `bac`.
 
 {% highlight haskell %}
 bitsAdd :: [Bool] -> [Bool] -> Bool -> [Bool]

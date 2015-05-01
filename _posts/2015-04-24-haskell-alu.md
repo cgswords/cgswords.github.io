@@ -14,6 +14,7 @@ Boolean algebra.
 I have since cleaned the code up once or twice, and I decided it would
 be neat to present it here. Due to its length, I am going to do it in a
 few parts: 
+
 1. We will construct a simple ALU Adder for 32-bit Boolean values 
 2. We will construct a larger ALU to support `and`, `or`, and `xor`
    and then construct a multiplexer to give us the correct answer.

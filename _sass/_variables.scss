@@ -1,13 +1,14 @@
 // Typography
 // --------------------------------------------------
 
-$base-font: goudy_bookletter, Calibri, Arial, sans-serif;
-$heading-font: $base-font;
+// $base-font: goudy_bookletter, Calibri, Arial, sans-serif;
+$base-font: Calibri, Arial, sans-serif;
+$heading-font: goudy_bookletter, $base-font;
 $caption-font: $base-font;
 $code-font: monospace;
 $alt-font: serif;
 
-$doc-font-size: 18;
+$doc-font-size: 16;
 $doc-line-height: 26;
 
 

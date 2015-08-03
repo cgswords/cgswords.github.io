@@ -2,7 +2,10 @@
 layout: post
 title:  Are you free?
 tags:   pictures 
-photo_url:  btown-graffiti.jpg
+image:
+  feature: btown-graffiti.jpg
+  credit: Cameron Swords
+  creditlink: #
 ---
 
 ![Are you free?]({{ site.url }}/assets/images/btown-graffiti.jpg)

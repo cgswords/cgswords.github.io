@@ -2,7 +2,10 @@
 layout: post
 title:  OPLSS Notes ToC
 tags:   pictures 
-photo_url:  oplss-2012.jpg
+image:
+  feature:  oplss-2012.jpg
+  credit: Cameron Swords
+  creditlink: #
 ---
 
 ![Table of Contents]({{ site.url }}/assets/images/oplss-2012.jpg)

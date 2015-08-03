@@ -8,5 +8,7 @@ image:
   creditlink: #
 ---
 
-What an amazing aiport.
+
+
+![What an amazing aiport.]({{ site.url }}/assets/images/seattle-airport.jpg)
 

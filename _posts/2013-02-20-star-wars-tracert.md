@@ -2,7 +2,10 @@
 layout: post
 title:  It's a period of civil war
 tags:   pictures 
-photo_url:  star-wars-tracert.jpg
+image:
+  feature: star-wars-tracert.jpg
+  credit: Cameron Swords
+  creditlink: #
 ---
 
 ![Star Wars TraceRt]({{ site.url }}/assets/images/star-wars-tracert.jpg)

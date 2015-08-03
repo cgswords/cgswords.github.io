@@ -19,7 +19,7 @@ image:
     {% endif %}
     {% if post.link %}
       <h2 class="entry-title">
-        <small><i><time datetime="{{ post.date | date_to_xmlschema }}"><a href="{{ site.url }}{{ post.url }}">{{ post.date | date: "%b %d, %Y" }}</a></time></i> - </small>
+        <small><i><time datetime="{{ post.date | date_to_xmlschema }}"><a href="{{ site.url }}{{ post.url }}">{{ post.date | date: "%Y.%m.%d" }}</a></time></i> - </small>
         <a href="{{ site.url }}{{ post.url }}" class="permalink" rel="bookmark" title="{{ post.title }}"><i class="fa fa-bookmark"></i></a> <a href="{{ post.link }}">{{ post.title }}</a>
       </h2>
     {% else %}

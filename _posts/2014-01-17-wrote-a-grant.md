@@ -1,6 +1,6 @@
 ---
 layout: post
-title: I Wrote a Grant
+title: Effect Handlers for Compilation
 tags: blog research
 ---
 So I wrote a grant. It wasn't particularly good, and it isn't

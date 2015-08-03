@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Stressing, Brewing, Batman, Papers
+title:  My First Ph.D. Venting Post
 tags:   blog life beer school
 ---
 It's been as while since I've written. I always mean to write more but I seldom,

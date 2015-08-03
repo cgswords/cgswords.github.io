@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  Writing Christmas Trees
+title:  Writing Christmas Trees, or Building A Cute Turing Tarpit
 tags:   blog language code
 ---
 

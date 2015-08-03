@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Subclassing
+title: The Curious Case of Subclassing and Scope
 tags: blog code
 ---
 The following is a brief discussion of classes and the issues with subclassing. 

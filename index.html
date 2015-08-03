@@ -19,7 +19,11 @@ image:
     {% endif %}
       <h2 class="entry-title">
         <small><time datetime="{{ post.date | date_to_xmlschema }}"><a href="{{ site.url }}{{ post.url }}">{{ post.date | date: "[%Y.%m.%d]" }}</a></time></small>
-    {% if post.link %}
+    {% if post.image.feature %}
+        <a href="{{ site.url }}{{ post.url }}" class="permalink" rel="bookmark" title="{{ post.title }}"><i class="fa fa-bookmark"></i></a> <a href="{{ post.link }}">{{ post.title }} [IMG]</a>
+    {% elsif post.quote %}
+        <a href="{{ site.url }}{{ post.url }}" rel="bookmark" title="{{ post.title }}" itemprop="url">{{ post.title }} ~ <small>{{post.source}}</small></a>
+    {% elsif post.link %}
         <a href="{{ site.url }}{{ post.url }}" class="permalink" rel="bookmark" title="{{ post.title }}"><i class="fa fa-bookmark"></i></a> <a href="{{ post.link }}">{{ post.title }}</a>
     {% else %}
         <a href="{{ site.url }}{{ post.url }}" rel="bookmark" title="{{ post.title }}" itemprop="url">{{ post.title }}</a>

@@ -1,0 +1,19 @@
+---
+layout: post-index
+title: Cameron Swords
+description: "A PL Ph.D. Student."
+tags: [Jekyll, theme, themes, responsive, blog, modern]
+comments: false
+image:
+  feature: winter-scene.jpg
+  credit: Cameron Swords
+  creditlink: #
+---
+
+{% for post in paginator.posts %}
+  <header>
+    {% if post.quote %}
+        <h3><i>"{{ post.title }}"</i> <small>- {{post.quote.source}}</small></h3>
+    {% endif %}
+  </header>
+{% endfor %}

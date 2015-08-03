@@ -16,7 +16,7 @@ body {
 }
 .entry-content {
 	@include font-size(16);
-	18 Dotted line underlines for links
+	// Dotted line underlines for links
 	p > a,
 	li > a {
 		border-bottom: 1px dotted lighten($link-color, 50);
@@ -215,7 +215,7 @@ header .entry-meta {
 			margin: 50px auto 30px auto;
 			padding: 50px 80px;
 			> p:first-child {
-				@include font-size(16);
+				@include font-size(18);
 			}
 		}
 	}

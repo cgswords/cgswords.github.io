@@ -2,7 +2,7 @@
 layout: post
 title:  Gobs of Recursion
 tags:   quotes 
+quote:
+  source: Kim Bruce, describing OO without fields
 ---
-
--- Kim Bruce, answering *"What do you when when you remove fields from object orientation?"*
 

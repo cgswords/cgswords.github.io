@@ -11,7 +11,6 @@ image:
 ---
 
 {% for post in paginator.posts %}
-<article class="hentry">
   <header>
     {% if post.image.feature %}
       <div class="entry-image-index">
@@ -34,10 +33,6 @@ image:
       <h1 class="entry-title"><a href="{{ site.url }}{{ post.url }}" rel="bookmark" title="{{ post.title }}" itemprop="url">{{ post.title }}</a></h1>
     {% endif %}
   </header>
-  <div class="entry-content">
-    {{ post.content }}
-  </div><!-- /.entry-content -->
-</article><!-- /.hentry -->
 {% endfor %}
 
 <div class="pagination">

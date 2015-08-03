@@ -18,7 +18,9 @@ image:
       <h2 class="entry-title">
         <small><time datetime="{{ post.date | date_to_xmlschema }}"><a href="{{ site.url }}{{ post.url }}">{{ post.date | date: "[%Y.%m.%d]" }}</a></time></small>
     {% if post.image.feature %}
-        <a href="{{ site.url }}{{ post.url }}" class="permalink" rel="bookmark" title="{{ post.title }}"><i class="fa fa-bookmark"></i></a> <a href="{{ post.link }}">[IMG] {{ post.title }}</a>
+        <a href="{{ site.url }}{{ post.url }}" rel="bookmark" title="{{ post.title }}" itemprop="url">
+          [IMG] {{ post.title }}
+        </a>
     {% elsif post.link %}
         <a href="{{ site.url }}{{ post.url }}" class="permalink" rel="bookmark" title="{{ post.title }}"><i class="fa fa-bookmark"></i></a> <a href="{{ post.link }}">[LINK] {{ post.title }}</a>
     {% else %}

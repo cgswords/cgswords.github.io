@@ -12,23 +12,20 @@ image:
 
 {% for post in paginator.posts %}
   <header>
-    {% if post.image.feature %}
-      <!-- <div class="entry-image-index">
-        <a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}"><div align="center"><img src="{{ site.url }}/assets/images/{{ post.image.feature }}" alt="{{ post.title }}"></div></a>
-      </div><!-- /.entry-image --> -->
-    {% endif %}
+    {% if post.quote %}
+        <h3><i>"{{ post.title }}"</i> <small>- {{post.quote.source}}</small></h3>
+    {% else %}
       <h2 class="entry-title">
         <small><time datetime="{{ post.date | date_to_xmlschema }}"><a href="{{ site.url }}{{ post.url }}">{{ post.date | date: "[%Y.%m.%d]" }}</a></time></small>
     {% if post.image.feature %}
-        <a href="{{ site.url }}{{ post.url }}" class="permalink" rel="bookmark" title="{{ post.title }}"><i class="fa fa-bookmark"></i></a> <a href="{{ post.link }}">{{ post.title }} [IMG]</a>
-    {% elsif post.quote %}
-        <a href="{{ site.url }}{{ post.url }}" rel="bookmark" title="{{ post.title }}" itemprop="url">{{ post.title }} ~ <small>{{post.source}}</small></a>
+        <a href="{{ site.url }}{{ post.url }}" class="permalink" rel="bookmark" title="{{ post.title }}"><i class="fa fa-bookmark"></i></a> <a href="{{ post.link }}">[IMG] {{ post.title }}</a>
     {% elsif post.link %}
-        <a href="{{ site.url }}{{ post.url }}" class="permalink" rel="bookmark" title="{{ post.title }}"><i class="fa fa-bookmark"></i></a> <a href="{{ post.link }}">{{ post.title }}</a>
+        <a href="{{ site.url }}{{ post.url }}" class="permalink" rel="bookmark" title="{{ post.title }}"><i class="fa fa-bookmark"></i></a> <a href="{{ post.link }}">[LINK] {{ post.title }}</a>
     {% else %}
         <a href="{{ site.url }}{{ post.url }}" rel="bookmark" title="{{ post.title }}" itemprop="url">{{ post.title }}</a>
     {% endif %}
       </h2>
+  {% endif %}
   </header>
 {% endfor %}
 

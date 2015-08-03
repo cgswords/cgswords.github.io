@@ -1,4 +1,4 @@
-title:            Cam Swords
+title:            Cameron Swords
 description:      Cameron Swords on the long road to the Ph.D.
 disqus_shortname: cswords   
 reading_time:     true
@@ -23,7 +23,7 @@ owner:
   flickr:         
   tumblr:         
   # google plus id, include the '+', eg +mmistakes
-  google_plus:    +yourid
+  google_plus:    # +yourid
 
 # Background image to be tiled on all pages
 background: 

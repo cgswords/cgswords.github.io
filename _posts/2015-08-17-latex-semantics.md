@@ -464,6 +464,10 @@ time demonstrating how one can be used to lay out inference rules.
 
 \[
   \begin{array}{cc}
+    \infr{}{\envent{\truev}{\boolt}}
+    &
+    \infr{}{\envent{\falsev}{\boolt}}
+    \\\\
     \envlookup{\typeEnv}{x}{\tau} 
     &
     \infr

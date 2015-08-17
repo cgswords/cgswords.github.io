@@ -190,14 +190,14 @@ I'm assuming you're at least a little familiar with
 [math environments and arrays](https://en.wikibooks.org/wiki/LaTeX/Mathematics) 
 [[2](http://latex.wikia.com/wiki/List_of_LaTeX_environments#Math_environments),
  [3](http://latex.wikia.com/wiki/Array_(LaTeX_environment))]. If you're not, 
-the quick explaination is that `\[` and `\]` enclose a math environment and the
+the quick explanation is that `\[` and `\]` enclose a math environment and the
 array environment has three columns which are right-align, center-aligned, and
 left-aligned respectively.
 
 The important draw here, though, is the language forms: they simply use our
 definitions. We have, in essence, used the LaTeX macro system to build a sort of
 "domain-specific language" that allows us to (more or less) write the language
-we are describing. Furthermore, consistently using these definitons means that
+we are describing. Furthermore, consistently using these definitions means that
 changing the syntax is as easy as changing the definition and rebuilding the
 file.
 
@@ -211,7 +211,7 @@ working with an OO language or the like, I would define
 
 **Building Semantic Definitions and Reductions, Part 1**
 
-With langauge definitions in place, we turn our focus to semantic reductions.
+With language definitions in place, we turn our focus to semantic reductions.
 For this purpose I am going to construct a call-by-value reduction model, first
 with denotational semantics and then with contexts and a reduction relation.
 
@@ -241,8 +241,8 @@ definition file:
 \newcommand{\dstep} [2] {#1 ~\Downarrow~ #2}
 {% endhighlight %}
 
-Now we're ready to write the full set of denotational rules, using the substition
-command for substition and `\dstep` for denotational reductions.
+Now we're ready to write the full set of denotational rules, using the
+substitution command for substitution and `\dstep` for denotational reductions.
 
 For the reduction rules, we have two layout options:
 

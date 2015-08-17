@@ -99,11 +99,13 @@ constructing a lambda calculus with a few extra terms.
 
 %% lambda
 \newcommand{\lamdefe}  [2] {\lambda #1.~#2}
-\newcommand{\lamdefea} [2] {\begin{array}{l}\lambda#1.\\\hspace*{.5em}#2\\\end{array}}
+\newcommand{\lamdefea} [2] {\begin{array}{l}\lambda#1.\\
+                                            \hspace*{.5em}#2\\\end{array}}
 
 %% let
 \newcommand{\letdefe}    [3] {\letbind{#1}{#2}~\letin{#3}}
-\newcommand{\letdefarre} [3] {\begin{array}{l}\letbind{#1}{#2}\\\letin{#3})\\\end{array}}
+\newcommand{\letdefarre} [3] {\begin{array}{l}\letbind{#1}{#2}\\
+                                              \letin{#3})\\\end{array}}
 
 \newcommand{\letbind}  [2] {\mathsf{let}~\lbind{#1}{#2}}
 \newcommand{\letbindp} [2] {\mathsf{let}~(\lbind{#1}{#2})}
@@ -112,7 +114,9 @@ constructing a lambda calculus with a few extra terms.
 
 %% if
 \newcommand{\ife}      [3] {\ifline{#1}~\thenline{#2}~\elseline{#3}}
-\newcommand{\ifea}     [3] {\begin{array}{l}\ifline{#1}\\\thenline{#2}\\\elseline{#3}\end{array}}
+\newcommand{\ifea}     [3] {\begin{array}{l}\ifline{#1}\\
+                                            \thenline{#2}\\
+                                            \elseline{#3}\end{array}}
 
 \newcommand{\ifop}         {\mathsf{if}}
 \newcommand{\ifline}   [1] {\ifop~ #1}
@@ -371,7 +375,8 @@ Next, we introduce evaluation contexts to our language definitions:
   %%% ...
   \\
   \Ctxt &:=& \Ctxt~e \alt v~\Ctxt \alt \letdefe{x}{\Ctxt}{e}\\
-        &\alt& \ife{\Ctxt}{e}{e} \alt \unop{\Ctxt} \alt \binop{\Ctxt}{e} \alt \binop{v}{\Ctxt}\\
+        &\alt& \ife{\Ctxt}{e}{e} \alt \unop{\Ctxt} %% no array break 
+         \alt  \binop{\Ctxt}{e} \alt \binop{v}{\Ctxt}\\
   \end{array}
 \]
 {% endhighlight %}

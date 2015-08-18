@@ -15,13 +15,8 @@ along.
 
 **Getting Started**
 
-First, you're going to want a few packages. 
-
-- Default Packages: proof, amsmath, listings, amsthm, and amssymb. These should
-  have come with your LaTeX install.
-
-These last two may come with your LaTeX install. Check if they do before trying
-to install them a second time.
+First, you're going to want a few packages, including proof, amsmath, listings,
+amsthm, and amssymb. These should have come with your LaTeX install.
 
 Now, we start our document in the usual way:
 

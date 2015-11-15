@@ -521,7 +521,7 @@ In closing, here are some parting comments:
    reduction relation, I find it convenient to build two versions: one with
    the default symbol and one that takes the symbol as input, as with the
    rules for type environment extension above.
-3. The [xspace](https://www.ctan.org/pkg/xspace] package is invaluable for
+3. The [xspace](https://www.ctan.org/pkg/xspace) package is invaluable for
    using commands and keywords within prose.
 4. All of the commands above, properly, should use `\ensuremath`. I'm too lazy
    to type that everywhere, so I don't, but if you are going to share such a

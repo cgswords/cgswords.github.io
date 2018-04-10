@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Effect Handlers for Compilation
-tags: blog research
+tags: research
 ---
 So I wrote a grant. It wasn't particularly good, and it isn't
 likely to get funded, and it got finished in *far too little time* to be
